@@ -88,22 +88,44 @@
       border-radius: 50px;
       cursor: pointer;
     }
-    /* Estilos de cartas y paginación (resumidos) */
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; }
-    .card { background: rgba(255,255,255,0.08); border-radius: 16px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.6); height: 260px; position: relative; }
-    .card.tiene { border: 3px solid #4caf50; }
-    .card img { width: 100%; height: 160px; object-fit: cover; }
-    .no-tiene-img { width: 100%; height: 160px; background: #000; display: flex; align-items: center; justify-content: center; font-size: 5em; color: #222; }
-    .nombre { font-size: 1.15em; font-weight: bold; }
-    .club { font-size: 0.9em; color: #ffeb3b; }
-    .status { position: absolute; top: 8px; right: 8px; font-size: 2.2em; color: #ffeb3b; }
+    .card { 
+      background: linear-gradient(135deg, #ffffff11, #00000033); 
+      border: 2px solid #ffffff33; 
+      border-radius: 16px; 
+      overflow: hidden; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6); 
+      transition: all 0.3s; 
+      position: relative; 
+      height: 260px; 
+      backdrop-filter: blur(5px); 
+    }
+    .card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 12px 30px rgba(0,0,0,0.8); }
+    .card.tiene { border: 3px solid #4caf50; background: linear-gradient(135deg, #4caf5022, #00000033); }
+    .card img { width: 100%; height: 160px; object-fit: cover; border-bottom: 2px solid #ffffff22; }
+    .no-tiene-img { 
+      width: 100%; height: 160px; 
+      background: #000; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 5em; 
+      color: #222; 
+      border-bottom: 2px solid #333; 
+    }
+    .gris { filter: grayscale(100%) brightness(0.5); }
+    .card p { margin: 6px 0; line-height: 1.2; padding: 0 8px; }
+    .nombre { font-size: 1.15em; font-weight: bold; text-shadow: 0 1px 3px #000; }
+    .club { font-size: 0.9em; font-weight: bold; opacity: 0.9; color: #ffeb3b; }
+    .status { position: absolute; top: 8px; right: 8px; font-size: 2.2em; font-weight: bold; color: #ffeb3b; text-shadow: 0 0 6px #000; }
     .pagination { margin: 20px 0; display: flex; justify-content: center; }
     .pagination button { background: #7b1fa2; color: white; padding: 12px 25px; margin: 0 15px; border-radius: 50px; border: none; cursor: pointer; font-size: 1.2em; }
     .pagination button:disabled { background: #555; cursor: not-allowed; }
+    footer { margin-top: 40px; font-size: 1em; color: #ccc; opacity: 0.8; }
   </style>
 </head>
 <body>
-  <!-- Portada inicial -->
+  <!-- Portada -->
   <div id="portada">
     <h1>Álbum Parodia 2026</h1>
     <div class="by">By rodryneta</div>
@@ -133,8 +155,32 @@
   </div>
 
   <script>
-    // Datos (pegá tu array completo de data aquí, el de clubes y jugadores)
-    const data = [ /* ... tu lista de 23 clubes y jugadores ... */ ];
+    // Datos de clubes y jugadores (completo, pegá tu lista si cambiaste)
+    const data = [
+      { club: 'Atletico parodia', jugadores: ['Rice', 'Capaldo', 'Nico gonzalez', 'Lavangoat', 'Pedri', 'Rodryneta', 'Vitinha'] },
+      { club: 'Atunes', jugadores: ['Penaldo (toxi)', 'Higuain', 'Gatti', 'Farfan', 'Lavangoat (Toxi)', 'Pedri (Toxi)', 'Sessegnon'] },
+      { club: 'Barderos', jugadores: ['Correa', 'Bicho', 'Julideus', 'Momazosney', 'Pogba', 'Lewandowski', 'Rodrygo'] },
+      { club: 'Black Guns', jugadores: ['Arrascarreta', 'Doku (Toxi)', 'Bellinjamon (Toxi)', 'Havertz (Toxi)', 'Salah', 'Tagliafico', 'Dembele'] },
+      { club: 'Buenos Aires', jugadores: ['Penaldo', 'Donny', 'Chiesa', 'Leoni', 'Pibejuli', 'Roony', 'Alarconzeus'] },
+      { club: 'City bell', jugadores: ['Gachazo', 'Rigoni', 'Dybala', 'Foden', 'Santi F', 'Alarcon'] },
+      { club: 'Capiata', jugadores: ['Subiambre', 'Julideus (Toxi)', 'Draxler (Toxi)', 'Lamine cacal', 'Akilouche', 'Cucurella', 'Olise (Toxi)'] },
+      { club: 'Fenix', jugadores: ['Arnold', 'Palacios', 'Piberol', 'Benzema', 'Messipanadero', 'Barella', 'Gavi'] },
+      { club: 'Estrella Azul', jugadores: ['Aravena', 'Palmer', 'Xenzito', 'Marchant', 'Mainoo', 'Garro', 'Rios'] },
+      { club: 'Fox', jugadores: ['Alan varela', 'Zeballos', 'Pellistri', 'Kane', 'Havertz', 'Nico paz', 'Valentini'] },
+      { club: 'Gatos', jugadores: ['Griezman (Toxi)', 'Pulisic', 'Enzo fernandez (Toxi)', 'Prestianni', 'Vegetti', 'Solari', 'Arnold (Toxi)'] },
+      { club: 'La plata', jugadores: ['Medina', 'Macallister', 'AntxnSk', 'Fermin (Toxi)', 'Prestianni (Toxi)', 'Julian Alvarez', 'Messipanadero (Toxi)'] },
+      { club: 'Livervillo', jugadores: ['Aravena (Toxi)', 'Enzo fernandez (Toxi)', 'Bellingham', 'Yamal', 'Almiron', 'Budi', 'Pedri (Toxi)'] },
+      { club: 'Minecraft Utd', jugadores: ['Sarco', 'Hormazabal (Toxi)', 'James', 'Foden', 'Borre', 'Richard (Toxi)', 'Garro (Toxi)'] },
+      { club: 'Capu', jugadores: ['Angel205098', 'Griezman', 'Doku', 'Paredes', 'Licha', 'Merentiel', 'Raphina'] },
+      { club: 'Marmotas', jugadores: ['Scott', 'Cetre', 'Veliz', 'Dibaladeus', 'Benjita'] },
+      { club: 'Rediablos', jugadores: ['Ansu fati', 'Pizarro', 'Xenzito (Toxi)', 'Rodryneta (Toxi)', 'Rossel (Toxi)', 'Subiabre', 'Cancelo'] },
+      { club: 'River', jugadores: ['Lautaro', 'Hormazabal', 'Molina', 'Savinho', 'Muller'] },
+      { club: 'Romanos', jugadores: ['Pabom (Toxi)', 'Ronaldo (Toxi)', 'Cavani', 'Gvardiol', 'Alvarez (Toxi)', 'Neur', 'Olise'] },
+      { club: 'Shirunley', jugadores: ['Enzitoabz', 'Balerdi', 'Ladrillo', 'Mati', 'Pabom', 'Fermin', 'Bellinjamon'] },
+      { club: 'Skull City', jugadores: ['Ali dia', 'Antony (Toxi)', 'Kirk', 'Ozil', 'Momazosney (Toxi)', 'Barella (Toxi)', 'Sanabria'] },
+      { club: 'Tigre', jugadores: ['Marchant (Toxi)', 'Lomonaco', 'Maxi', 'Meza', 'Merentiel (Toxi)', 'Neymar', 'Dybala (Toxi)'] },
+      { club: 'Yakuzaz', jugadores: ['Hakimi', 'Rossel', 'Subiabre (Toxi)', 'Draxler', 'Lautaro (Toxi)', 'Trossard', 'Suarez'] }
+    ];
 
     const figuritas = [];
     let idCounter = 1;
@@ -148,7 +194,29 @@
     const clubs = data.map(d => d.club);
     let currentPage = 0;
 
-    const fotosJugador = { /* mapa de imágenes reales como antes */ };
+    const fotosJugador = {
+      'Pedri': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Pedri_2022_%28cropped%29.jpg/800px-Pedri_2022_%28cropped%29.jpg',
+      'Rodrygo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Rodrygo_2022_%28cropped%29.jpg/800px-Rodrygo_2022_%28cropped%29.jpg',
+      'Lewandowski': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Robert_Lewandowski_2021.jpg/800px-Robert_Lewandowski_2021.jpg',
+      'Salah': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mohamed_Salah_2018.jpg/800px-Mohamed_Salah_2018.jpg',
+      'Havertz': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kai_Havertz_2021.jpg/800px-Kai_Havertz_2021.jpg',
+      'Dembele': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Ousmane_Demb%C3%A9l%C3%A9_2018.jpg/800px-Ousmane_Demb%C3%A9l%C3%A9_2018.jpg',
+      'Dybala': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Paulo_Dybala_2022.jpg/800px-Paulo_Dybala_2022.jpg',
+      'Bellingham': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Jude_Bellingham_2022.jpg/800px-Jude_Bellingham_2022.jpg',
+      'Neymar': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Neymar_Jr._-_2018.jpg/800px-Neymar_Jr._-_2018.jpg',
+      'Griezman': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Antoine_Griezmann_2018.jpg/800px-Antoine_Griezmann_2018.jpg',
+      'Foden': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Phil_Foden_2023.jpg/800px-Phil_Foden_2023.jpg',
+      'Julian Alvarez': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Juli%C3%A1n_Alvarez_2022.jpg/800px-Juli%C3%A1n_Alvarez_2022.jpg',
+      'Enzo fernandez': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Enzo_Fern%C3%A1ndez_2022.jpg/800px-Enzo_Fern%C3%A1ndez_2022.jpg',
+      'Yamal': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Lamine_Yamal_2023.jpg/800px-Lamine_Yamal_2023.jpg',
+      'Benzema': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Karim_Benzema_2019.jpg/800px-Karim_Benzema_2019.jpg',
+      'Gavi': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Gavi_2022.jpg/800px-Gavi_2022.jpg',
+      'Barella': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Nicolo_Barella_2021.jpg/800px-Nicolo_Barella_2021.jpg',
+      'Hakimi': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Achraf_Hakimi_2022.jpg/800px-Achraf_Hakimi_2022.jpg',
+      'Suarez': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Luis_Su%C3%A1rez_2018.jpg/800px-Luis_Su%C3%A1rez_2018.jpg',
+      'Ronaldo (Toxi)': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/800px-Cristiano_Ronaldo_2018.jpg'
+    };
+
     const fotoNegra = 'https://via.placeholder.com/150/000000/000000?text=?';
 
     const albumDiv = document.getElementById('album');
@@ -221,16 +289,15 @@
 
     function actualizarSobres() {
       const disponibles = Math.floor((Date.now() - parseInt(ultimo)) / cooldownMs);
-      const btn = document.getElementById('abrir-sobre-btn');
       if (disponibles > 0) {
-        btn.classList.remove('blocked');
-        btn.classList.add('available');
-        btn.disabled = false;
+        abrirSobreBtn.classList.remove('blocked');
+        abrirSobreBtn.classList.add('available');
+        abrirSobreBtn.disabled = false;
         sobreMensaje.textContent = `¡${disponibles} sobre(s) disponible(s)!`;
       } else {
-        btn.classList.add('blocked');
-        btn.classList.remove('available');
-        btn.disabled = true;
+        abrirSobreBtn.classList.add('blocked');
+        abrirSobreBtn.classList.remove('available');
+        abrirSobreBtn.disabled = true;
         const proximo = new Date(parseInt(ultimo) + cooldownMs);
         const restaMs = proximo - Date.now();
         const horas = Math.floor(restaMs / 3600000);
@@ -239,24 +306,45 @@
       }
     }
 
+    // Lógica completa de abrir sobre
     document.getElementById('abrir-sobre-btn').addEventListener('click', () => {
-      // Pegá acá la lógica completa de abrir sobre del código anterior
-      // (el for loop con nuevas, guardar, alert, etc.)
-      alert('¡Abriste sobre(s)! (agregá la lógica completa aquí)');
+      let disponibles = Math.floor((Date.now() - parseInt(ultimo)) / cooldownMs);
+      if (disponibles <= 0) return;
+
+      const nuevas = [];
+      for (let s = 0; s < disponibles; s++) {
+        for (let i = 0; i < 5; i++) {
+          let figu;
+          const pegadas = figuritas.filter(f => f.tiene);
+          if (Math.random() < 0.25 && pegadas.length > 0) {
+            figu = pegadas[Math.floor(Math.random() * pegadas.length)];
+          } else {
+            const noPegadas = figuritas.filter(f => !f.tiene);
+            figu = (noPegadas.length > 0 ? noPegadas : figuritas)[Math.floor(Math.random() * (noPegadas.length || total))];
+          }
+          if (!figu.tiene) figu.tiene = true;
+          nuevas.push(`\( {figu.nombre} ( \){figu.club})`);
+        }
+      }
+
       ultimo = Date.now().toString();
       localStorage.setItem('albumParodiaUltimoSobre', ultimo);
+
+      guardar();
+      setTimeout(actualizarTodo, 100);
       actualizarSobres();
+      alert(`¡\( {disponibles} pack(s) abierto(s)! 🔥\nSalieron:\n \){nuevas.join('\n')}`);
     });
 
     // Paginación
-    prevBtn.addEventListener('click', () => {
+    document.getElementById('prev-btn').addEventListener('click', () => {
       if (currentPage > 0) {
         currentPage--;
         actualizarTodo();
       }
     });
 
-    nextBtn.addEventListener('click', () => {
+    document.getElementById('next-btn').addEventListener('click', () => {
       if (currentPage < clubs.length - 1) {
         currentPage++;
         actualizarTodo();
@@ -267,4 +355,4 @@
     setInterval(actualizarSobres, 60000);
   </script>
 </body>
-  </html>
+</html>
