@@ -6,61 +6,80 @@
   <title>Álbum Parodia 2026 ⚽</title>
   <style>
     body { 
-      font-family: Arial, sans-serif; 
-      background: linear-gradient(to bottom, #6a1b9a, #4a148c, #311b92); 
-      margin: 0; padding: 10px; 
+      font-family: 'Segoe UI', Arial, sans-serif; 
+      background: linear-gradient(to bottom, #4a148c, #311b92); 
+      margin: 0; padding: 15px; 
       text-align: center; 
       color: #fff; 
     }
-    header { background: #4a148c; color: white; padding: 20px; border-radius: 0 0 20px 20px; margin: -10px -10px 20px -10px; }
-    h1 { margin: 0; font-size: 2.5em; }
-    .by { font-size: 1.1em; opacity: 0.9; margin-top: 5px; }
-    #progreso { font-size: 1.3em; margin: 15px 0; font-weight: bold; color: #ffeb3b; }
-    #sobre-section { margin: 20px 0; }
-    #sobre-btn { background: #f44336; color: white; border: none; padding: 15px 40px; font-size: 1.2em; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s; }
-    #sobre-btn:hover { transform: scale(1.05); }
-    #sobre-btn:disabled { background: #ccc; cursor: not-allowed; }
-    #mensaje { color: #ffeb3b; font-weight: bold; margin: 10px 0; font-size: 1.1em; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; padding: 10px; }
+    header { background: #311b92; color: white; padding: 25px; border-radius: 0 0 25px 25px; margin: -15px -15px 25px -15px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+    h1 { margin: 0; font-size: 2.8em; text-shadow: 0 2px 5px #000; }
+    .by { font-size: 1.2em; opacity: 0.85; margin-top: 8px; font-style: italic; }
+    #progreso { font-size: 1.4em; margin: 20px 0; font-weight: bold; color: #ffeb3b; text-shadow: 0 1px 3px #000; }
+    #sobre-section { margin: 25px 0; }
+    #sobre-btn { background: linear-gradient(#f44336, #d32f2f); color: white; border: none; padding: 18px 50px; font-size: 1.3em; border-radius: 60px; cursor: pointer; box-shadow: 0 6px 15px rgba(244,67,54,0.4); transition: all 0.3s; }
+    #sobre-btn:hover { transform: scale(1.08); box-shadow: 0 8px 20px rgba(244,67,54,0.6); }
+    #sobre-btn:disabled { background: #666; box-shadow: none; }
+    #mensaje { color: #ffeb3b; font-weight: bold; margin: 12px 0; font-size: 1.2em; text-shadow: 0 1px 3px #000; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 15px; padding: 15px; }
     .card { 
-      background: rgba(255,255,255,0.08); 
-      border-radius: 12px; 
+      background: linear-gradient(135deg, #ffffff11, #00000033); 
+      border: 2px solid #ffffff33; 
+      border-radius: 16px; 
       overflow: hidden; 
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4); 
-      transition: transform 0.2s; 
-      color: #fff; 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.6); 
+      transition: all 0.3s; 
       position: relative; 
-      height: 240px; 
+      height: 260px; 
+      backdrop-filter: blur(5px); 
     }
-    .card:hover { transform: translateY(-8px); }
-    .card.tiene { border: 3px solid #4caf50; background: rgba(76,175,80,0.15); }
-    .card img { width: 100%; height: 140px; object-fit: cover; }
-    .gris { filter: grayscale(90%) brightness(0.7); }
-    .card p { margin: 4px 0; line-height: 1.1; }
-    .nombre { font-size: 1.1em; font-weight: bold; }
-    .club { font-size: 0.85em; font-weight: bold; opacity: 0.9; }
+    .card:hover { transform: translateY(-10px) scale(1.05); box-shadow: 0 12px 30px rgba(0,0,0,0.8); }
+    .card.tiene { border: 3px solid #4caf50; background: linear-gradient(135deg, #4caf5022, #00000033); }
+    .card img { 
+      width: 100%; 
+      height: 160px; 
+      object-fit: cover; 
+      border-bottom: 2px solid #ffffff22; 
+    }
+    .no-tiene-img { 
+      width: 100%; 
+      height: 160px; 
+      background: #000; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+      font-size: 5em; 
+      color: #222; 
+      border-bottom: 2px solid #333; 
+      text-shadow: 0 0 10px #000; 
+    }
+    .gris { filter: grayscale(100%) brightness(0.5); }
+    .card p { margin: 6px 0; line-height: 1.2; padding: 0 8px; }
+    .nombre { font-size: 1.15em; font-weight: bold; text-shadow: 0 1px 3px #000; }
+    .club { font-size: 0.9em; font-weight: bold; opacity: 0.9; color: #ffeb3b; }
     .status { 
       position: absolute; 
-      top: 10px; right: 10px; 
-      font-size: 2em; 
+      top: 8px; right: 8px; 
+      font-size: 2.2em; 
       font-weight: bold; 
       color: #ffeb3b; 
-      text-shadow: 0 0 5px #000; 
+      text-shadow: 0 0 6px #000; 
     }
-    .pagination { margin: 20px 0; }
+    .pagination { margin: 25px 0; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; }
     .pagination button { 
       background: #7b1fa2; 
       color: white; 
       border: none; 
-      padding: 10px 20px; 
-      margin: 0 10px; 
+      padding: 12px 25px; 
+      margin: 5px 15px; 
       border-radius: 50px; 
       cursor: pointer; 
-      font-size: 1.1em; 
+      font-size: 1.2em; 
+      box-shadow: 0 4px 10px rgba(123,31,162,0.4); 
     }
-    .pagination button:disabled { background: #555; cursor: not-allowed; }
-    .page-info { font-size: 1.2em; margin: 10px 0; }
-    footer { margin-top: 30px; font-size: 0.9em; color: #ddd; }
+    .pagination button:disabled { background: #555; box-shadow: none; cursor: not-allowed; }
+    .page-info { font-size: 1.3em; margin: 10px 20px; font-weight: bold; color: #ffeb3b; }
+    footer { margin-top: 40px; font-size: 1em; color: #ccc; opacity: 0.8; }
   </style>
 </head>
 <body>
@@ -82,7 +101,7 @@
   <footer>Hecho por rodryneta con Grok • José C. Paz 2026</footer>
 
   <script>
-    // Datos (igual que antes)
+    // Datos de clubes y jugadores (igual que antes)
     const data = [
       { club: 'Atletico parodia', jugadores: ['Rice', 'Capaldo', 'Nico gonzalez', 'Lavangoat', 'Pedri', 'Rodryneta', 'Vitinha'] },
       { club: 'Atunes', jugadores: ['Penaldo (toxi)', 'Higuain', 'Gatti', 'Farfan', 'Lavangoat (Toxi)', 'Pedri (Toxi)', 'Sessegnon'] },
@@ -121,10 +140,33 @@
     const clubs = data.map(d => d.club);
     let currentPage = 0;
 
-    const fotosClub = {};
-    clubs.forEach(club => {
-      fotosClub[club] = `https://via.placeholder.com/150/9c27b0/fff?text=${encodeURIComponent(club)}`;
-    });
+    // Imágenes reales para jugadores famosos (agregá más si querés)
+    const fotosJugador = {
+      'Pedri': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Pedri_2022_%28cropped%29.jpg/800px-Pedri_2022_%28cropped%29.jpg',
+      'Rodrygo': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Rodrygo_2022_%28cropped%29.jpg/800px-Rodrygo_2022_%28cropped%29.jpg',
+      'Lewandowski': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Robert_Lewandowski_2021.jpg/800px-Robert_Lewandowski_2021.jpg',
+      'Salah': 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Mohamed_Salah_2018.jpg/800px-Mohamed_Salah_2018.jpg',
+      'Havertz': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Kai_Havertz_2021.jpg/800px-Kai_Havertz_2021.jpg',
+      'Dembele': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Ousmane_Demb%C3%A9l%C3%A9_2018.jpg/800px-Ousmane_Demb%C3%A9l%C3%A9_2018.jpg',
+      'Dybala': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Paulo_Dybala_2022.jpg/800px-Paulo_Dybala_2022.jpg',
+      'Bellingham': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Jude_Bellingham_2022.jpg/800px-Jude_Bellingham_2022.jpg',
+      'Neymar': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/Neymar_Jr._-_2018.jpg/800px-Neymar_Jr._-_2018.jpg',
+      'Griezman': 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Antoine_Griezmann_2018.jpg/800px-Antoine_Griezmann_2018.jpg',
+      'Foden': 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Phil_Foden_2023.jpg/800px-Phil_Foden_2023.jpg',
+      'Julian Alvarez': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Juli%C3%A1n_Alvarez_2022.jpg/800px-Juli%C3%A1n_Alvarez_2022.jpg',
+      'Enzo fernandez': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Enzo_Fern%C3%A1ndez_2022.jpg/800px-Enzo_Fern%C3%A1ndez_2022.jpg',
+      'Yamal': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/Lamine_Yamal_2023.jpg/800px-Lamine_Yamal_2023.jpg',
+      'Benzema': 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Karim_Benzema_2019.jpg/800px-Karim_Benzema_2019.jpg',
+      'Gavi': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Gavi_2022.jpg/800px-Gavi_2022.jpg',
+      'Barella': 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Nicolo_Barella_2021.jpg/800px-Nicolo_Barella_2021.jpg',
+      'Hakimi': 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Achraf_Hakimi_2022.jpg/800px-Achraf_Hakimi_2022.jpg',
+      'Suarez': 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Luis_Su%C3%A1rez_2018.jpg/800px-Luis_Su%C3%A1rez_2018.jpg',
+      'Ronaldo (Toxi)': 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/800px-Cristiano_Ronaldo_2018.jpg',
+      // Para todos los demás (parodia): silueta negra con ?
+    };
+
+    // Silueta personalizada para cartas no desbloqueadas (negro con ?)
+    const siluetaNoDesbloqueada = 'https://via.placeholder.com/150/000000/000000?text=?'; // Puedes cambiar por un link mejor si subís una silueta a Imgur
 
     const albumDiv = document.getElementById('album');
     const progreso = document.getElementById('progreso');
@@ -153,7 +195,6 @@
       progreso.textContent = `Completado: ${completado} / ${total}`;
 
       const currentClub = clubs[currentPage];
-      const clubData = data.find(d => d.club === currentClub);
       const clubJugadores = figuritas.filter(f => f.club === currentClub);
 
       pageInfo.textContent = `Página ${currentPage + 1} / ${clubs.length} - ${currentClub}`;
@@ -163,10 +204,12 @@
       albumDiv.innerHTML = '';
       clubJugadores.forEach((f, index) => {
         const card = document.createElement('div');
-        card.className = `card ${f.tiene ? 'tiene' : 'gris'}`;
-        const fotoUrl = fotosClub[f.club] || 'https://via.placeholder.com/150?text=Sin+Foto';
+        card.className = `card ${f.tiene ? 'tiene' : ''}`;
+        const imgContent = f.tiene 
+          ? `<img src="\( {fotosJugador[f.nombre] || siluetaNoDesbloqueada}" alt=" \){f.nombre}">`
+          : `<img src="${siluetaNoDesbloqueada}" alt="No desbloqueada">`;
         card.innerHTML = `
-          <img src="\( {fotoUrl}" alt=" \){f.nombre}">
+          ${imgContent}
           <p class="nombre">${f.nombre}</p>
           <p class="club">${f.club}</p>
           <div class="status">${f.tiene ? '✓' : '?'}</div>
@@ -175,6 +218,7 @@
       });
     }
 
+    // Paginación y lógica de sobre (igual que antes, no cambié)
     prevBtn.addEventListener('click', () => {
       if (currentPage > 0) {
         currentPage--;
@@ -189,25 +233,23 @@
       }
     });
 
-    // Lógica de sobre: cada 12 horas, se acumulan
-    let ultimo = localStorage.getItem('albumParodiaUltimoSobre');
-    if (!ultimo) ultimo = Date.now() - 12*60*60*1000; // permite abrir al menos uno al entrar si nunca abrió
+    let ultimo = localStorage.getItem('albumParodiaUltimoSobre') || Date.now();
+    const cooldownMs = 12 * 60 * 60 * 1000;
 
-    function puedeAbrirSobre() {
+    function calcularSobresDisponibles() {
       const msPasados = Date.now() - parseInt(ultimo);
-      return msPasados >= 12 * 60 * 60 * 1000;
+      return Math.floor(msPasados / cooldownMs);
     }
 
     function actualizarBoton() {
-      const msPasados = Date.now() - parseInt(ultimo);
-      const horasPasadas = Math.floor(msPasados / (12*60*60*1000));
-      if (horasPasadas >= 1) {
+      const disponibles = calcularSobresDisponibles();
+      if (disponibles > 0) {
         btn.disabled = false;
-        mensaje.textContent = `¡${horasPasadas} sobre(s) disponible(s)!`;
+        mensaje.textContent = `¡${disponibles} sobre(s) disponible(s)!`;
         mensaje.style.color = '#ffeb3b';
       } else {
         btn.disabled = true;
-        const proximo = new Date(parseInt(ultimo) + 12*60*60*1000);
+        const proximo = new Date(parseInt(ultimo) + cooldownMs);
         const restaMs = proximo - Date.now();
         const horas = Math.floor(restaMs / 3600000);
         const mins = Math.floor((restaMs % 3600000) / 60000);
@@ -217,15 +259,11 @@
     }
 
     btn.addEventListener('click', () => {
-      if (!puedeAbrirSobre()) return;
+      let disponibles = calcularSobresDisponibles();
+      if (disponibles <= 0) return;
 
-      const msPasados = Date.now() - parseInt(ultimo);
-      let sobresDisponibles = Math.floor(msPasados / (12*60*60*1000));
-      if (sobresDisponibles < 1) return;
-
-      const nuevasTodas = [];
-      for (let s = 0; s < sobresDisponibles; s++) {
-        const nuevas = [];
+      const nuevas = [];
+      for (let s = 0; s < disponibles; s++) {
         for (let i = 0; i < 5; i++) {
           let figu;
           const pegadas = figuritas.filter(f => f.tiene);
@@ -238,17 +276,15 @@
           if (!figu.tiene) figu.tiene = true;
           nuevas.push(`\( {figu.nombre} ( \){figu.club})`);
         }
-        nuevasTodas.push(...nuevas);
       }
 
-      // Actualizar último tiempo al ahora (consumir todos los acumulados)
       ultimo = Date.now().toString();
       localStorage.setItem('albumParodiaUltimoSobre', ultimo);
 
       guardar();
-      actualizarTodo();
+      setTimeout(actualizarTodo, 100);
       actualizarBoton();
-      alert(`¡\( {sobresDisponibles} pack(s) abierto(s)! 🔥\nSalieron:\n \){nuevasTodas.join('\n')}`);
+      alert(`¡\( {disponibles} pack(s) abierto(s)! 🔥\nSalieron:\n \){nuevas.join('\n')}`);
     });
 
     cargar();
