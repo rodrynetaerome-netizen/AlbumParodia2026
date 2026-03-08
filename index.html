@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Álbum Parodia ⚽</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: linear-gradient(to bottom, #e3f2fd, #bbdefb); margin: 0; padding: 10px; text-align: center; color: #333; }
+    header { background: #1976d2; color: white; padding: 15px; border-radius: 0 0 15px 15px; margin: -10px -10px 20px -10px; }
+    h1 { margin: 0; font-size: 2em; }
+    #progreso { font-size: 1.3em; margin: 15px 0; font-weight: bold; color: #d81b60; }
+    #sobre-section { margin: 20px 0; }
+    #sobre-btn { background: #f44336; color: white; border: none; padding: 15px 40px; font-size: 1.2em; border-radius: 50px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2); transition: all 0.3s; }
+    #sobre-btn:hover { transform: scale(1.05); }
+    #sobre-btn:disabled { background: #ccc; cursor: not-allowed; }
+    #mensaje { color: #ef6c00; font-weight: bold; margin: 10px 0; font-size: 1.1em; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 12px; padding: 10px; }
+    .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 3px 8px rgba(0,0,0,0.15); transition: transform 0.2s; }
+    .card:hover { transform: translateY(-5px); }
+    .card.tiene { border: 3px solid #4caf50; }
+    .card img { width: 100%; height: 130px; object-fit: cover; }
+    .gris { filter: grayscale(90%) brightness(0.8); }
+    .card p { margin: 8px 4px; font-size: 0.9em; font-weight: bold; }
+    footer { margin-top: 30px; font-size: 0.9em; color: #555; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Álbum Parodia</h1>
+    <p>¡Coleccioná figuritas de mentira! ⚽😂</p>
+  </header>
+  <div id="progreso">Completado: 0 / 198</div>
+  <div id="sobre-section">
+    <button id="sobre-btn">Abrir Sobre (5 figuritas)</button>
+    <div id="mensaje"></div>
+  </div>
+  <div class="grid" id="album"></div>
+  <footer>Hecho por rodryneta con ayuda de Grok • José C. Paz 2026</footer>
+  <script>
+    const clubes = ['River', 'Boca', 'Racing', 'Independiente', 'San Lorenzo', 'Vélez', 'Estudiantes', 'Gimnasia LP', 'Lanús', 'Argentinos', 'Huracán', "Newell's", 'Rosario Central', 'Talleres', 'Belgrano', 'Instituto', 'Unión', 'Colón', 'Tigre', 'Def y Justicia', 'Banfield', 'Godoy Cruz', 'Platense', 'Sarmiento', 'Central Córdoba', 'Atl. Tucumán', 'Barracas Central', 'Arsenal'];
+    const figuritas = [];
+    let idCounter = 1;
+    clubes.forEach(club => { for (let j = 1; j <= 7; j++) { figuritas.push({ id: idCounter++, nombre: `${club} Jugador ${j}`, club: club, tiene: false }); } });
+    figuritas.push({ id: 199, nombre: 'Técnico Gallardo', club: 'Técnicos', tiene: false });
+    figuritas.push({ id: 200, nombre: 'Técnico Bianchi', club: 'Técnicos', tiene: false });
+    const total = figuritas.length;
+    const albumDiv = document.getElementById('album');
+    const progreso = document.getElementById('progreso');
+    const btn = document.getElementById('sobre-btn');
+    const mensaje = document.getElementById('mensaje');
+    function cargar() {
+      const guardado = localStorage.getItem('albumParodiaPegadas');
+      if (guardado) { const ids = JSON.parse(guardado); figuritas.forEach(f => { if (ids.includes(f.id)) f.tiene = true; }); }
+      actualizarTodo();
+    }
+    function guardar() {
+      const pegadasIds = figuritas.filter(f => f.tiene).map(f => f.id);
+      localStorage.setItem('albumParodiaPegadas', JSON.stringify(pegadasIds));
+    }
+    function actualizarTodo() {
+      const completado = figuritas.filter(f => f.tiene).length;
+      progreso.textContent = `Completado: ${completado} / ${total}`;
+      albumDiv.innerHTML = '';
+      figuritas.forEach(f => {
+        const card = document.createElement('div');
+        card.className = `card ${f.tiene ? 'tiene' : 'gris'}`;
+        card.innerHTML = `<img src="https://via.placeholder.com/150?text=\( {encodeURIComponent(f.club)}" alt=" \){f.nombre}"><p>${f.nombre}</p>`;
+        albumDiv.appendChild(card);
+      });
+    }
+    let ultimo = localStorage.getItem('albumParodiaUltimoSobre');
+    function puedeAbrirSobre() { if (!ultimo) return true; const msPasados = Date.now() - parseInt(ultimo); return msPasados >= 24 * 60 * 60 * 1000; }
+    function actualizarBoton() {
+      if (puedeAbrirSobre()) { btn.disabled = false; mensaje.textContent = '¡Sobre disponible!'; mensaje.style.color = '#4caf50'; } else {
+        btn.disabled = true; const proximo = new Date(parseInt(ultimo) + 24*60*60*1000); const restaMs = proximo - Date.now(); const horas = Math.floor(restaMs / 3600000); const mins = Math.floor((restaMs % 3600000) / 60000); mensaje.textContent = `Próximo sobre en ${horas}h ${mins}min`; mensaje.style.color = '#ef6c00'; }
+    }
+    btn.addEventListener('click', () => {
+      if (!puedeAbrirSobre()) return;
+      const nuevas = [];
+      for (let i = 0; i < 5; i++) { const randIndex = Math.floor(Math.random() * total); const figu = figuritas[randIndex]; if (!figu.tiene) { figu.tiene = true; } nuevas.push(figu.nombre); }
+      guardar(); ultimo = Date.now().toString(); localStorage.setItem('albumParodiaUltimoSobre', ultimo); actualizarTodo(); actualizarBoton(); alert(`¡Pack abierto! 🔥\nSalieron:\n${nuevas.join('\n')}`);
+    });
+    cargar(); actualizarBoton(); setInterval(actualizarBoton, 60000);
+  </script>
+</body>
+  </html>
